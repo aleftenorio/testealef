@@ -1,0 +1,4743 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TMOVPay API Docs",
+    "description": "Swagger documentation",
+    "version": "4.2.6",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "ConsultaTermosUsoResponseDto": {
+        "type": "object",
+        "properties": {
+          "termos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "termos"
+        ]
+      },
+      "BuscarTermosResponseDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "metric": {
+            "type": "object"
+          },
+          "page": {
+            "type": "number"
+          },
+          "size": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        }
+      },
+      "TermoTipo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "ativo": {
+            "type": "boolean"
+          },
+          "dataAlteracao": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Data no formato ISO 2020-01-01T00:00:00"
+          },
+          "dataCriacao": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Data no formato ISO 2020-01-01T00:00:00"
+          }
+        },
+        "required": [
+          "id",
+          "descricao",
+          "ativo",
+          "dataAlteracao",
+          "dataCriacao"
+        ]
+      },
+      "Termo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "texto": {
+            "type": "string"
+          },
+          "caminhoArquivo": {
+            "type": "string"
+          },
+          "termoTipo": {
+            "$ref": "#/components/schemas/TermoTipo"
+          },
+          "ativo": {
+            "type": "boolean"
+          },
+          "dataAlteracao": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Data no formato ISO 2020-01-01T00:00:00"
+          },
+          "dataCriacao": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Data no formato ISO 2020-01-01T00:00:00"
+          }
+        },
+        "required": [
+          "id",
+          "texto",
+          "caminhoArquivo",
+          "termoTipo",
+          "ativo",
+          "dataAlteracao",
+          "dataCriacao"
+        ]
+      },
+      "CadastrarTaxaAdministrativaRequestDto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "desconto": {
+            "type": "boolean"
+          },
+          "tipo": {
+            "type": "number",
+            "description": "Tipo da Taxa.EX 1 para TAG e 2 Para outros"
+          }
+        },
+        "required": [
+          "nome",
+          "valor",
+          "desconto",
+          "tipo"
+        ]
+      },
+      "AtualizarTaxaAdministrativaRequestDto": {
+        "type": "object",
+        "properties": {
+          "ativo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ativo"
+        ]
+      },
+      "NotificacaoOnboardingContratadoRequestDto": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string"
+          },
+          "tipoNotificacao": {
+            "type": "number"
+          },
+          "telefone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "documento",
+          "tipoNotificacao",
+          "telefone"
+        ]
+      },
+      "ContratadoConfiguracao": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string",
+            "example": "75474931069"
+          },
+          "percentualAdiantamento": {
+            "type": "number"
+          },
+          "percentualSaldo": {
+            "type": "number"
+          },
+          "percentualEstadia": {
+            "type": "number"
+          },
+          "percentualOutrosCreditos": {
+            "type": "number"
+          },
+          "ativo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "documento",
+          "percentualAdiantamento",
+          "percentualSaldo",
+          "percentualEstadia",
+          "percentualOutrosCreditos",
+          "ativo"
+        ]
+      },
+      "DadosLogDto": {
+        "type": "object",
+        "properties": {
+          "nomeUsuario": {
+            "type": "object",
+            "description": "O nome do usuário responsável pela alteração do log",
+            "example": "Jonas Costa"
+          },
+          "origem": {
+            "type": "number",
+            "description": "A origem do cadastro, sendo 1 - TMOVPAY, 2 - TMOV ou 3 - APP",
+            "example": 1
+          }
+        },
+        "required": [
+          "nomeUsuario",
+          "origem"
+        ]
+      },
+      "AtualizarDecisaoRestoPedagioDto": {
+        "type": "object",
+        "properties": {
+          "CNPJCPF": {
+            "type": "string"
+          },
+          "DecisaoRestoPedagioCodigo": {
+            "type": "string"
+          },
+          "NomeUsuario": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "CNPJCPF",
+          "DecisaoRestoPedagioCodigo",
+          "NomeUsuario"
+        ]
+      },
+      "BuscarContratoDocumentoQuitacaoResponseDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "metric": {
+            "type": "object"
+          },
+          "page": {
+            "type": "number"
+          },
+          "size": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        }
+      },
+      "ContratoDocumentoQuitacao": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "number"
+          },
+          "ativo": {
+            "type": "boolean"
+          },
+          "obrigatorio": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "descricao",
+          "codigo",
+          "ativo",
+          "obrigatorio"
+        ]
+      },
+      "ReplicarContratoClienteDto": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string",
+            "example": "75474931069"
+          }
+        },
+        "required": [
+          "documento"
+        ]
+      },
+      "ReplicarContratoTomadorEnderecoDto": {
+        "type": "object",
+        "properties": {
+          "cep": {
+            "type": "string"
+          },
+          "logradouro": {
+            "type": "string"
+          },
+          "codigoIbgeCidade": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "cep",
+          "logradouro",
+          "codigoIbgeCidade"
+        ]
+      },
+      "ReplicarContratoTomadorDto": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string"
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "contratoTomadorEndereco": {
+            "$ref": "#/components/schemas/ReplicarContratoTomadorEnderecoDto"
+          }
+        },
+        "required": [
+          "documento",
+          "razaoSocial",
+          "contratoTomadorEndereco"
+        ]
+      },
+      "ReplicarPessoaFisicaDto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "nomeMae": {
+            "type": "string"
+          },
+          "dataNascimento": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome",
+          "cpf",
+          "nomeMae",
+          "dataNascimento"
+        ]
+      },
+      "ReplicarPessoaJuridicaDto": {
+        "type": "object",
+        "properties": {
+          "cnpj": {
+            "type": "string",
+            "example": "87527132000154"
+          },
+          "razaoSocial": {
+            "type": "string",
+            "example": "SOTRAN SA"
+          },
+          "nomeFantasia": {
+            "type": "string",
+            "example": "Nome Fantasia da empresa"
+          },
+          "cnaePrincipal": {
+            "type": "string",
+            "example": "6821801"
+          },
+          "naturezaLegal": {
+            "type": "string",
+            "example": "2089"
+          },
+          "dataAbertura": {
+            "format": "date-time",
+            "type": "string",
+            "example": "1964-06-15T17:55:50.393Z"
+          },
+          "receitaAnual": {
+            "type": "number",
+            "example": 50000.3
+          }
+        },
+        "required": [
+          "cnpj",
+          "razaoSocial",
+          "nomeFantasia",
+          "dataAbertura",
+          "receitaAnual"
+        ]
+      },
+      "ReplicarPessoaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "documento": {
+            "type": "string"
+          },
+          "pessoaFisica": {
+            "$ref": "#/components/schemas/ReplicarPessoaFisicaDto"
+          },
+          "pessoaJuridica": {
+            "$ref": "#/components/schemas/ReplicarPessoaJuridicaDto"
+          }
+        },
+        "required": [
+          "id",
+          "documento"
+        ]
+      },
+      "ReplicarContratoContratadoDto": {
+        "type": "object",
+        "properties": {
+          "rntrc": {
+            "type": "string"
+          },
+          "equiparadoTac": {
+            "type": "boolean"
+          },
+          "pessoa": {
+            "$ref": "#/components/schemas/ReplicarPessoaDto"
+          },
+          "celular": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "rntrc",
+          "equiparadoTac",
+          "pessoa"
+        ]
+      },
+      "ReplicarContratoMotoristaDto": {
+        "type": "object",
+        "properties": {
+          "cnh": {
+            "type": "string"
+          },
+          "pessoa": {
+            "$ref": "#/components/schemas/ReplicarPessoaDto"
+          },
+          "celular": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "cnh",
+          "pessoa"
+        ]
+      },
+      "ReplicarContratoCargaDto": {
+        "type": "object",
+        "properties": {
+          "cepColeta": {
+            "type": "string"
+          },
+          "dataInicio": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "cepEntrega": {
+            "type": "string"
+          },
+          "dataPrevisaoEntrega": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "codigoIbgeCidadeColeta": {
+            "type": "number"
+          },
+          "codigoIbgeCidadeEntrega": {
+            "type": "number"
+          },
+          "valorMercadoria": {
+            "type": "number"
+          },
+          "valorFrete": {
+            "type": "number"
+          },
+          "valorCombustivel": {
+            "type": "number"
+          },
+          "cargaPeso": {
+            "type": "number"
+          },
+          "latitudeColeta": {
+            "type": "object"
+          },
+          "longitudeColeta": {
+            "type": "object"
+          },
+          "latitudeEntrega": {
+            "type": "object"
+          },
+          "longitudeEntrega": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "dataPrevisaoEntrega",
+          "valorMercadoria",
+          "valorFrete",
+          "valorCombustivel",
+          "latitudeColeta",
+          "longitudeColeta",
+          "latitudeEntrega",
+          "longitudeEntrega"
+        ]
+      },
+      "ReplicarContratoRegraDto": {
+        "type": "object",
+        "properties": {
+          "percentualToleranciaPeso": {
+            "type": "number"
+          },
+          "tarifaTonelada": {
+            "type": "number"
+          },
+          "freteLotacao": {
+            "type": "boolean"
+          },
+          "documentosObrigatoriosQuitacao": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tipoQuebraMercadoria": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "percentualToleranciaPeso",
+          "tarifaTonelada",
+          "freteLotacao"
+        ]
+      },
+      "ReplicarContratoStatusDto": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "codigo"
+        ]
+      },
+      "ReplicarContratoCiotDto": {
+        "type": "object",
+        "properties": {
+          "ciot": {
+            "type": "string"
+          },
+          "codigoVerificador": {
+            "type": "string"
+          },
+          "senhaAlteracao": {
+            "type": "string"
+          },
+          "emContingencia": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ciot",
+          "codigoVerificador",
+          "senhaAlteracao",
+          "emContingencia"
+        ]
+      },
+      "ContratoQuitacaoSaldo": {
+        "type": "object",
+        "properties": {
+          "valorQuebraMercadoria": {
+            "type": "number",
+            "example": 100
+          },
+          "valorQuebraMercadoriaCalculado": {
+            "type": "number",
+            "example": 100
+          },
+          "valorQuebraFrete": {
+            "type": "number",
+            "example": 100
+          },
+          "pesoChegada": {
+            "type": "number",
+            "example": 100
+          },
+          "dataDescarga": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "valorQuebraMercadoria",
+          "valorQuebraMercadoriaCalculado",
+          "valorQuebraFrete",
+          "pesoChegada",
+          "dataDescarga"
+        ]
+      },
+      "DadosPedagioDto": {
+        "type": "object",
+        "properties": {
+          "identificadorHistorico": {
+            "type": "string",
+            "example": "999784e5-1a62-4dbd-7f01-08d89b735e19"
+          },
+          "quantidadeEixos": {
+            "type": "number",
+            "example": 6
+          },
+          "tipoVeiculo": {
+            "type": "string",
+            "example": "Caminhão"
+          },
+          "fornecedor": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "identificadorHistorico",
+          "quantidadeEixos",
+          "tipoVeiculo",
+          "fornecedor"
+        ]
+      },
+      "ContratoLancamentoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "valor": {
+            "type": "number",
+            "example": 100
+          },
+          "valorPago": {
+            "type": "number",
+            "example": 100
+          },
+          "valorPagoCalculado": {
+            "type": "number",
+            "example": 100
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "ADIANTAMENTO",
+              "SALDO",
+              "ESTADIA",
+              "RPA",
+              "PEDAGIO"
+            ],
+            "example": "ESTADIA"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "EM_ABERTO",
+              "BLOQUEADO",
+              "CANCELADO",
+              "QUITADO",
+              "PAGO_EMBARCADOR"
+            ],
+            "example": "EM_ABERTO"
+          },
+          "habilitarPagamentoCartao": {
+            "type": "boolean"
+          },
+          "token": {
+            "type": "string"
+          },
+          "contratoQuitacaoSaldo": {
+            "$ref": "#/components/schemas/ContratoQuitacaoSaldo"
+          },
+          "idUsuarioQuitacao": {
+            "type": "number",
+            "example": 100
+          },
+          "idEstabelecimento": {
+            "type": "number",
+            "example": 100
+          },
+          "dataPagamento": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "dadosPedagio": {
+            "$ref": "#/components/schemas/DadosPedagioDto"
+          }
+        },
+        "required": [
+          "id",
+          "valor",
+          "valorPago",
+          "valorPagoCalculado",
+          "tipo",
+          "status",
+          "habilitarPagamentoCartao",
+          "contratoQuitacaoSaldo",
+          "idUsuarioQuitacao",
+          "idEstabelecimento",
+          "dataPagamento",
+          "dadosPedagio"
+        ]
+      },
+      "AtualizarContratoLancamentoRequestDto": {
+        "type": "object",
+        "properties": {
+          "contratoLancamento": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContratoLancamentoDto"
+            }
+          }
+        },
+        "required": [
+          "contratoLancamento"
+        ]
+      },
+      "ReplicarContratoVeiculoDto": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string",
+            "example": "ABC1432"
+          }
+        },
+        "required": [
+          "placa"
+        ]
+      },
+      "ReplicarContratoDocumentoFiscalDto": {
+        "type": "object",
+        "properties": {
+          "numeroDocumento": {
+            "type": "number",
+            "example": 234234
+          },
+          "serie": {
+            "type": "string",
+            "example": "101"
+          },
+          "pesoSaida": {
+            "type": "number",
+            "example": 30340.5
+          },
+          "valor": {
+            "type": "number",
+            "example": 600.5
+          },
+          "tipoDocumento": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "numeroDocumento",
+          "serie",
+          "pesoSaida",
+          "valor",
+          "tipoDocumento"
+        ]
+      },
+      "ReplicarContratoAcrescimoSaldoDto": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "example": "BONUS DE CAMPANHA"
+          },
+          "valor": {
+            "type": "number",
+            "example": 5.5
+          }
+        },
+        "required": [
+          "descricao",
+          "valor"
+        ]
+      },
+      "ReplicarContratoDescontoSaldoDto": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "example": "SEGURO DE CARGA"
+          },
+          "valor": {
+            "type": "number",
+            "example": 25.5
+          }
+        },
+        "required": [
+          "descricao",
+          "valor"
+        ]
+      },
+      "ReplicarContratoPedagioDto": {
+        "type": "object",
+        "properties": {
+          "pedagioPagoEmbarcador": {
+            "type": "boolean",
+            "example": true
+          },
+          "pedagioEletronico": {
+            "type": "boolean",
+            "example": true
+          },
+          "valorPedagio": {
+            "type": "number",
+            "example": 150.2
+          },
+          "identificadorHistorico": {
+            "type": "string",
+            "example": "999784e5-1a62-4dbd-7f01-08d89b735e19"
+          },
+          "quantidadeEixos": {
+            "type": "number",
+            "example": 6
+          },
+          "tipoVeiculo": {
+            "type": "string",
+            "example": "Caminhão"
+          },
+          "fornecedor": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "pedagioPagoEmbarcador",
+          "pedagioEletronico",
+          "valorPedagio",
+          "identificadorHistorico",
+          "quantidadeEixos",
+          "tipoVeiculo",
+          "fornecedor"
+        ]
+      },
+      "ClienteTomadorDto": {
+        "type": "object",
+        "properties": {
+          "cpfCnpj": {
+            "type": "string"
+          },
+          "nomeFantasia": {
+            "type": "string"
+          },
+          "razaoSocial": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "cpfCnpj",
+          "nomeFantasia",
+          "razaoSocial"
+        ]
+      },
+      "FilialEmissoraDto": {
+        "type": "object",
+        "properties": {
+          "cnpj": {
+            "type": "string"
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeFantasia": {
+            "type": "string"
+          },
+          "codigoFilial": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "cnpj",
+          "razaoSocial",
+          "nomeFantasia",
+          "codigoFilial"
+        ]
+      },
+      "ReplicarContratoTmovDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "idViagem": {
+            "type": "number"
+          },
+          "idIntegracao": {
+            "type": "string"
+          },
+          "ciotDeclarar": {
+            "type": "boolean"
+          },
+          "ciotSubContratacao": {
+            "type": "boolean"
+          },
+          "ciotAltoDesempenho": {
+            "type": "boolean"
+          },
+          "ciotDestinacaoComercial": {
+            "type": "boolean"
+          },
+          "ciotPrincipal": {
+            "type": "string"
+          },
+          "pedagioPagoEmbarcador": {
+            "type": "boolean"
+          },
+          "distancia": {
+            "type": "number"
+          },
+          "quantidadeTarifas": {
+            "type": "number"
+          },
+          "distanciaRetorno": {
+            "type": "number"
+          },
+          "cepRetorno": {
+            "type": "string"
+          },
+          "dataEmissao": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/ReplicarContratoClienteDto"
+          },
+          "contratoTomadorRemetente": {
+            "$ref": "#/components/schemas/ReplicarContratoTomadorDto"
+          },
+          "contratoTomadorDestinatario": {
+            "$ref": "#/components/schemas/ReplicarContratoTomadorDto"
+          },
+          "contratado": {
+            "$ref": "#/components/schemas/ReplicarContratoContratadoDto"
+          },
+          "motorista": {
+            "$ref": "#/components/schemas/ReplicarContratoMotoristaDto"
+          },
+          "contratoCarga": {
+            "$ref": "#/components/schemas/ReplicarContratoCargaDto"
+          },
+          "contratoRegra": {
+            "$ref": "#/components/schemas/ReplicarContratoRegraDto"
+          },
+          "irrpf": {
+            "type": "number"
+          },
+          "inss": {
+            "type": "number"
+          },
+          "sestSenat": {
+            "type": "number"
+          },
+          "valorTarifas": {
+            "type": "number"
+          },
+          "contratoStatus": {
+            "$ref": "#/components/schemas/ReplicarContratoStatusDto"
+          },
+          "contratoCiot": {
+            "$ref": "#/components/schemas/ReplicarContratoCiotDto"
+          },
+          "origem": {
+            "type": "number"
+          },
+          "lancamentos": {
+            "$ref": "#/components/schemas/AtualizarContratoLancamentoRequestDto"
+          },
+          "veiculos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReplicarContratoVeiculoDto"
+            }
+          },
+          "documentosFiscais": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReplicarContratoDocumentoFiscalDto"
+            }
+          },
+          "acrescimosSaldo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReplicarContratoAcrescimoSaldoDto"
+            }
+          },
+          "descontosSaldo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReplicarContratoDescontoSaldoDto"
+            }
+          },
+          "pedagio": {
+            "$ref": "#/components/schemas/ReplicarContratoPedagioDto"
+          },
+          "clienteTomador": {
+            "$ref": "#/components/schemas/ClienteTomadorDto"
+          },
+          "filialEmissora": {
+            "$ref": "#/components/schemas/FilialEmissoraDto"
+          }
+        },
+        "required": [
+          "idIntegracao",
+          "ciotDeclarar",
+          "distancia",
+          "dataEmissao",
+          "cliente",
+          "contratoTomadorRemetente",
+          "contratoTomadorDestinatario",
+          "contratado",
+          "motorista",
+          "contratoCarga",
+          "contratoStatus",
+          "origem",
+          "veiculos",
+          "documentosFiscais",
+          "acrescimosSaldo",
+          "descontosSaldo",
+          "clienteTomador",
+          "filialEmissora"
+        ]
+      },
+      "Contrato": {
+        "type": "object",
+        "properties": {
+          "idIntegracao": {
+            "type": "string"
+          },
+          "ciotDeclarar": {
+            "type": "boolean"
+          },
+          "ciotSubContratacao": {
+            "type": "boolean"
+          },
+          "ciotAltoDesempenho": {
+            "type": "boolean"
+          },
+          "ciotDestinacaoComercial": {
+            "type": "boolean"
+          },
+          "ciotPrincipal": {
+            "type": "string"
+          },
+          "pedagioPagoEmbarcador": {
+            "type": "boolean"
+          },
+          "distancia": {
+            "type": "number"
+          },
+          "irrpf": {
+            "type": "number"
+          },
+          "inss": {
+            "type": "number"
+          },
+          "outrosDescontos": {
+            "type": "number"
+          },
+          "outrosAcrescimos": {
+            "type": "number"
+          },
+          "debitosInclusos": {
+            "type": "number"
+          },
+          "creditosInclusos": {
+            "type": "number"
+          },
+          "sestSenat": {
+            "type": "number"
+          },
+          "quantidadeTarifas": {
+            "type": "number"
+          },
+          "valorTarifas": {
+            "type": "number"
+          },
+          "distanciaRetorno": {
+            "type": "number"
+          },
+          "cepRetorno": {
+            "type": "string"
+          },
+          "dataEmissao": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "ativo": {
+            "type": "boolean"
+          },
+          "idExterno": {
+            "type": "number"
+          },
+          "origem": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "idIntegracao",
+          "ciotDeclarar",
+          "ciotSubContratacao",
+          "ciotAltoDesempenho",
+          "ciotDestinacaoComercial",
+          "ciotPrincipal",
+          "pedagioPagoEmbarcador",
+          "distancia",
+          "irrpf",
+          "inss",
+          "outrosDescontos",
+          "outrosAcrescimos",
+          "debitosInclusos",
+          "creditosInclusos",
+          "sestSenat",
+          "quantidadeTarifas",
+          "valorTarifas",
+          "distanciaRetorno",
+          "cepRetorno",
+          "dataEmissao",
+          "ativo",
+          "idExterno",
+          "origem"
+        ]
+      },
+      "CadastratoContratoEstadoDto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "sigla": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome",
+          "sigla"
+        ]
+      },
+      "CadastroContratoCidadeDto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "codigoIbge": {
+            "type": "number"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/CadastratoContratoEstadoDto"
+          }
+        },
+        "required": [
+          "nome",
+          "codigoIbge",
+          "latitude",
+          "longitude",
+          "estado"
+        ]
+      },
+      "ColetaDto": {
+        "type": "object",
+        "properties": {
+          "cidadeIbge": {
+            "type": "number",
+            "example": 4300034
+          },
+          "cep": {
+            "type": "string",
+            "example": "86055630"
+          },
+          "dataInicioFrete": {
+            "type": "string",
+            "example": "2020-03-20T17:55:50.393Z"
+          },
+          "cepPorAPI": {
+            "type": "string",
+            "example": "86055630"
+          },
+          "latitude": {
+            "type": "object"
+          },
+          "longitude": {
+            "type": "object"
+          },
+          "cidade": {
+            "$ref": "#/components/schemas/CadastroContratoCidadeDto"
+          }
+        },
+        "required": [
+          "cidadeIbge",
+          "cep",
+          "dataInicioFrete",
+          "cepPorAPI",
+          "latitude",
+          "longitude",
+          "cidade"
+        ]
+      },
+      "EntregaDto": {
+        "type": "object",
+        "properties": {
+          "cidadeIbge": {
+            "type": "number",
+            "example": 4300034
+          },
+          "cep": {
+            "type": "string",
+            "example": "86055630"
+          },
+          "dataPrevisaoTerminoFrete": {
+            "type": "string",
+            "example": "2020-03-25T17:55:50.393Z"
+          },
+          "cepPorAPI": {
+            "type": "string",
+            "example": "86055630"
+          },
+          "latitude": {
+            "type": "object"
+          },
+          "longitude": {
+            "type": "object"
+          },
+          "cidade": {
+            "$ref": "#/components/schemas/CadastroContratoCidadeDto"
+          }
+        },
+        "required": [
+          "cidadeIbge",
+          "cep",
+          "dataPrevisaoTerminoFrete",
+          "cepPorAPI",
+          "latitude",
+          "longitude",
+          "cidade"
+        ]
+      },
+      "AtualizarContratoTmovPayDto": {
+        "type": "object",
+        "properties": {
+          "idViagem": {
+            "type": "number"
+          },
+          "idIntegracao": {
+            "type": "string"
+          },
+          "lancamentos": {
+            "$ref": "#/components/schemas/AtualizarContratoLancamentoRequestDto"
+          },
+          "documentosFiscais": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReplicarContratoDocumentoFiscalDto"
+            }
+          },
+          "clienteTomador": {
+            "$ref": "#/components/schemas/ClienteTomadorDto"
+          },
+          "filialEmissora": {
+            "$ref": "#/components/schemas/FilialEmissoraDto"
+          },
+          "coleta": {
+            "$ref": "#/components/schemas/ColetaDto"
+          },
+          "entrega": {
+            "$ref": "#/components/schemas/EntregaDto"
+          },
+          "distancia": {
+            "type": "number"
+          },
+          "dataEmissao": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "idIntegracao",
+          "documentosFiscais",
+          "clienteTomador",
+          "filialEmissora",
+          "coleta",
+          "entrega",
+          "distancia",
+          "dataEmissao"
+        ]
+      },
+      "AtualizarReplicarContratoTmovDto": {
+        "type": "object",
+        "properties": {
+          "idIntegracao": {
+            "type": "string"
+          },
+          "contratoStatus": {
+            "$ref": "#/components/schemas/ReplicarContratoStatusDto"
+          },
+          "lancamentos": {
+            "$ref": "#/components/schemas/AtualizarContratoLancamentoRequestDto"
+          },
+          "documentosFiscais": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clienteTomador": {
+            "$ref": "#/components/schemas/ClienteTomadorDto"
+          },
+          "filialEmissora": {
+            "$ref": "#/components/schemas/FilialEmissoraDto"
+          },
+          "contratoCarga": {
+            "$ref": "#/components/schemas/ReplicarContratoCargaDto"
+          },
+          "dataEmissao": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "idIntegracao",
+          "contratoStatus",
+          "clienteTomador",
+          "filialEmissora",
+          "contratoCarga",
+          "dataEmissao"
+        ]
+      },
+      "AcrescimoSaldoDto": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "example": "BONUS DE CAMPANHA"
+          },
+          "valor": {
+            "type": "number",
+            "example": 5.5
+          }
+        },
+        "required": [
+          "descricao",
+          "valor"
+        ]
+      },
+      "DescontoSaldoDto": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "example": "SEGURO DE CARGA"
+          },
+          "valor": {
+            "type": "number",
+            "example": 25.5
+          }
+        },
+        "required": [
+          "descricao",
+          "valor"
+        ]
+      },
+      "AtualizarContratoComposicaoSaldoRequestDto": {
+        "type": "object",
+        "properties": {
+          "acrescimosSaldo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AcrescimoSaldoDto"
+            }
+          },
+          "descontosSaldo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DescontoSaldoDto"
+            }
+          }
+        },
+        "required": [
+          "acrescimosSaldo",
+          "descontosSaldo"
+        ]
+      },
+      "EnderecoDto": {
+        "type": "object",
+        "properties": {
+          "cep": {
+            "type": "string",
+            "example": "86055630"
+          },
+          "cidadeIbge": {
+            "type": "number",
+            "example": 4300034
+          },
+          "logradouro": {
+            "type": "string",
+            "example": "Rua das Alamedas"
+          }
+        },
+        "required": [
+          "cep",
+          "cidadeIbge",
+          "logradouro"
+        ]
+      },
+      "ClienteRemetenteDto": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string",
+            "example": "75474931069"
+          },
+          "razaoSocial": {
+            "type": "string",
+            "example": "SOTRAN SA"
+          },
+          "nomeFantasia": {
+            "type": "string",
+            "example": "SOTRAN SA"
+          },
+          "tipoPessoa": {
+            "type": "string",
+            "enum": [
+              "PJ",
+              "PF"
+            ],
+            "example": "PF"
+          },
+          "endereco": {
+            "$ref": "#/components/schemas/EnderecoDto"
+          }
+        },
+        "required": [
+          "documento",
+          "razaoSocial",
+          "nomeFantasia",
+          "tipoPessoa",
+          "endereco"
+        ]
+      },
+      "ClienteDestinatarioDto": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string",
+            "example": "75474931069"
+          },
+          "razaoSocial": {
+            "type": "string",
+            "example": "SOTRAN SA"
+          },
+          "nomeFantasia": {
+            "type": "string",
+            "example": "SOTRAN SA"
+          },
+          "tipoPessoa": {
+            "type": "string",
+            "enum": [
+              "PJ",
+              "PF"
+            ],
+            "example": "PF"
+          },
+          "endereco": {
+            "$ref": "#/components/schemas/EnderecoDto"
+          }
+        },
+        "required": [
+          "documento",
+          "razaoSocial",
+          "nomeFantasia",
+          "tipoPessoa",
+          "endereco"
+        ]
+      },
+      "ContratadoDto": {
+        "type": "object",
+        "properties": {
+          "rntrc": {
+            "type": "string",
+            "example": "000326095"
+          },
+          "documento": {
+            "type": "string",
+            "example": "75474931069"
+          },
+          "razaoSocial": {
+            "type": "string",
+            "example": "SOTRAN SA"
+          },
+          "nomeFantasia": {
+            "type": "string",
+            "example": "SOTRAN SA"
+          },
+          "tipoPessoa": {
+            "type": "string",
+            "enum": [
+              "PJ",
+              "PF"
+            ],
+            "example": "PF"
+          },
+          "endereco": {
+            "$ref": "#/components/schemas/EnderecoDto"
+          }
+        },
+        "required": [
+          "rntrc",
+          "documento",
+          "razaoSocial",
+          "nomeFantasia",
+          "tipoPessoa",
+          "endereco"
+        ]
+      },
+      "VeiculoDto": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string",
+            "example": "ABC1432"
+          },
+          "rntrc": {
+            "type": "string",
+            "example": "00001432"
+          }
+        },
+        "required": [
+          "placa",
+          "rntrc"
+        ]
+      },
+      "MotoristaDto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "example": "João da Silva"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "75474931069"
+          },
+          "cnh": {
+            "type": "string",
+            "example": "60899285649"
+          }
+        },
+        "required": [
+          "nome",
+          "cpf",
+          "cnh"
+        ]
+      },
+      "CargaDto": {
+        "type": "object",
+        "properties": {
+          "codigoNatureza": {
+            "type": "number",
+            "example": 2940.5
+          },
+          "peso": {
+            "type": "number",
+            "example": 32000
+          }
+        },
+        "required": [
+          "codigoNatureza",
+          "peso"
+        ]
+      },
+      "FreteRetornoDto": {
+        "type": "object",
+        "properties": {
+          "cep": {
+            "type": "string",
+            "example": "86055630"
+          },
+          "distancia": {
+            "type": "number",
+            "example": 0
+          }
+        },
+        "required": [
+          "cep",
+          "distancia"
+        ]
+      },
+      "CiotDto": {
+        "type": "object",
+        "properties": {
+          "declararCiot": {
+            "type": "boolean",
+            "example": true,
+            "default": true
+          },
+          "subContratacao": {
+            "type": "boolean",
+            "example": true
+          },
+          "ciotPrincipal": {
+            "type": "string",
+            "example": "123312"
+          },
+          "altoDesempenho": {
+            "type": "boolean",
+            "example": true
+          },
+          "destinacaoComercial": {
+            "type": "boolean",
+            "example": true
+          },
+          "freteRetorno": {
+            "$ref": "#/components/schemas/FreteRetornoDto"
+          }
+        }
+      },
+      "ViagemDto": {
+        "type": "object",
+        "properties": {
+          "kmDistanciaPercorrida": {
+            "type": "number",
+            "example": 400
+          },
+          "valorMercadoria": {
+            "type": "number",
+            "example": 37849.2
+          },
+          "valorFrete": {
+            "type": "number",
+            "example": 245.3
+          },
+          "valorAdiantamento": {
+            "type": "number",
+            "example": 200.3
+          },
+          "statusAdiantamento": {
+            "type": "string",
+            "enum": [
+              "EM_ABERTO",
+              "BLOQUEADO",
+              "CANCELADO",
+              "QUITADO",
+              "PAGO_EMBARCADOR"
+            ],
+            "example": "EM_ABERTO"
+          },
+          "valorSaldo": {
+            "type": "number",
+            "example": 50.3
+          },
+          "valorEstadia": {
+            "type": "number",
+            "example": null,
+            "nullable": true
+          },
+          "valorRpa": {
+            "type": "number",
+            "example": null,
+            "nullable": true
+          },
+          "valorCombustivel": {
+            "type": "number",
+            "example": 0
+          },
+          "valorIrrpf": {
+            "type": "number",
+            "example": 0
+          },
+          "valorInss": {
+            "type": "number",
+            "example": 5.57
+          },
+          "valorSestSenat": {
+            "type": "number",
+            "example": 1.57
+          },
+          "dataEmissao": {
+            "type": "string",
+            "example": "2020-03-25T17:55:50.393Z"
+          },
+          "quantidadeTarifas": {
+            "type": "number",
+            "example": 0
+          },
+          "valorTarifas": {
+            "type": "number",
+            "example": 0
+          }
+        },
+        "required": [
+          "kmDistanciaPercorrida",
+          "valorMercadoria",
+          "valorFrete",
+          "statusAdiantamento",
+          "valorSaldo",
+          "valorIrrpf",
+          "valorInss",
+          "valorSestSenat",
+          "dataEmissao"
+        ]
+      },
+      "PedagioDto": {
+        "type": "object",
+        "properties": {
+          "pedagioPagoEmbarcador": {
+            "type": "boolean",
+            "example": true
+          },
+          "valorPedagio": {
+            "type": "number",
+            "example": 150.2
+          },
+          "identificadorHistorico": {
+            "type": "string",
+            "example": "999784e5-1a62-4dbd-7f01-08d89b735e19"
+          },
+          "quantidadeEixos": {
+            "type": "number",
+            "example": 6
+          },
+          "tipoVeiculo": {
+            "type": "string",
+            "example": "Caminhão"
+          },
+          "fornecedor": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "pedagioPagoEmbarcador",
+          "valorPedagio",
+          "identificadorHistorico",
+          "quantidadeEixos",
+          "tipoVeiculo",
+          "fornecedor"
+        ]
+      },
+      "RegrasDto": {
+        "type": "object",
+        "properties": {
+          "percentualToleranciaPeso": {
+            "type": "number",
+            "example": 0.25
+          },
+          "tarifaTonelada": {
+            "type": "number",
+            "example": 20
+          },
+          "tipoQuebraMercadoria": {
+            "type": "string",
+            "example": "DIFERENCA",
+            "enum": [
+              "DIFERENCA",
+              "INTEGRAL",
+              "NAO_COBRAR"
+            ]
+          },
+          "freteLotacao": {
+            "type": "boolean",
+            "example": false
+          },
+          "documentosObrigatoriosQuitacao": {
+            "example": [
+              1,
+              20,
+              25
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "percentualToleranciaPeso",
+          "tarifaTonelada",
+          "tipoQuebraMercadoria",
+          "freteLotacao"
+        ]
+      },
+      "DocumentoFiscalDto": {
+        "type": "object",
+        "properties": {
+          "numeroDocumento": {
+            "type": "number",
+            "example": 234234
+          },
+          "serie": {
+            "type": "string",
+            "example": "101"
+          },
+          "pesoSaida": {
+            "type": "number",
+            "example": 30340.5
+          },
+          "valor": {
+            "type": "number",
+            "example": 600.5
+          },
+          "tipoDocumento": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "numeroDocumento",
+          "serie",
+          "pesoSaida",
+          "valor",
+          "tipoDocumento"
+        ]
+      },
+      "CadastroContratoRequestDto": {
+        "type": "object",
+        "properties": {
+          "idIntegracaoExterno": {
+            "type": "string",
+            "example": 10
+          },
+          "cnpjCliente": {
+            "type": "string",
+            "example": "47100583000196"
+          },
+          "clienteRemetente": {
+            "$ref": "#/components/schemas/ClienteRemetenteDto"
+          },
+          "clienteDestinatario": {
+            "$ref": "#/components/schemas/ClienteDestinatarioDto"
+          },
+          "contratado": {
+            "$ref": "#/components/schemas/ContratadoDto"
+          },
+          "veiculos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VeiculoDto"
+            }
+          },
+          "motorista": {
+            "$ref": "#/components/schemas/MotoristaDto"
+          },
+          "coleta": {
+            "$ref": "#/components/schemas/ColetaDto"
+          },
+          "entrega": {
+            "$ref": "#/components/schemas/EntregaDto"
+          },
+          "carga": {
+            "$ref": "#/components/schemas/CargaDto"
+          },
+          "ciot": {
+            "$ref": "#/components/schemas/CiotDto"
+          },
+          "viagem": {
+            "$ref": "#/components/schemas/ViagemDto"
+          },
+          "pedagio": {
+            "$ref": "#/components/schemas/PedagioDto"
+          },
+          "regras": {
+            "$ref": "#/components/schemas/RegrasDto"
+          },
+          "documentosFiscais": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoFiscalDto"
+            }
+          },
+          "acrescimosSaldo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AcrescimoSaldoDto"
+            }
+          },
+          "descontosSaldo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DescontoSaldoDto"
+            }
+          },
+          "idViagem": {
+            "type": "number"
+          },
+          "clienteTomador": {
+            "$ref": "#/components/schemas/ClienteTomadorDto"
+          },
+          "filialEmissora": {
+            "$ref": "#/components/schemas/FilialEmissoraDto"
+          },
+          "distancia": {
+            "type": "number"
+          },
+          "dataEmissao": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "idIntegracaoExterno",
+          "cnpjCliente",
+          "clienteRemetente",
+          "clienteDestinatario",
+          "contratado",
+          "veiculos",
+          "motorista",
+          "coleta",
+          "entrega",
+          "viagem",
+          "regras",
+          "documentosFiscais",
+          "acrescimosSaldo",
+          "descontosSaldo",
+          "idViagem",
+          "clienteTomador",
+          "filialEmissora",
+          "distancia",
+          "dataEmissao"
+        ]
+      },
+      "BuscarRelacionamentosEmContratoRequestDto": {
+        "type": "object",
+        "properties": {
+          "documentos": {
+            "example": [
+              "75474931069",
+              "74154338000134"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "codigoContratoStatus": {
+            "type": "string",
+            "example": "EM_TRANSITO"
+          }
+        },
+        "required": [
+          "documentos",
+          "codigoContratoStatus"
+        ]
+      },
+      "CancelarContratoDto": {
+        "type": "object",
+        "properties": {
+          "idIntegracao": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "idIntegracao"
+        ]
+      },
+      "ValorAdicionalContratoRequestDto": {
+        "type": "object",
+        "properties": {
+          "valor": {
+            "type": "number"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "idTipoExterno": {
+            "type": "number"
+          },
+          "descricaoTipoExterno": {
+            "type": "string"
+          },
+          "tipo": {
+            "type": "string"
+          },
+          "idContrato": {
+            "type": "number"
+          },
+          "ativo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "valor",
+          "descricao",
+          "idTipoExterno",
+          "descricaoTipoExterno",
+          "tipo",
+          "idContrato",
+          "ativo"
+        ]
+      },
+      "ContratoStatus": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "ativo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "descricao",
+          "codigo",
+          "ativo"
+        ]
+      },
+      "BuscarContratoLancamentoResponseDto": {
+        "type": "object",
+        "properties": {
+          "dados": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pagina": {
+            "type": "number"
+          },
+          "quantidadePaginas": {
+            "type": "number"
+          },
+          "quantidadePorPagina": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "dados",
+          "pagina",
+          "quantidadePaginas",
+          "quantidadePorPagina",
+          "total"
+        ]
+      },
+      "InsereContratoLancamentoRequestDto": {
+        "type": "object",
+        "properties": {
+          "idIntegracao": {
+            "type": "string"
+          },
+          "valorOriginal": {
+            "type": "number"
+          },
+          "tipo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "idIntegracao",
+          "valorOriginal",
+          "tipo"
+        ]
+      },
+      "InsereContratoLancamentoResponseDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "idContratoLancamento": {
+            "type": "number"
+          }
+        }
+      },
+      "BuscarPendentesResponseDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "metric": {
+            "type": "object"
+          },
+          "page": {
+            "type": "number"
+          },
+          "size": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        }
+      },
+      "BuscarLancamenstosPorContratadoMotoristaDto": {
+        "type": "object",
+        "properties": {
+          "documentoContratado": {
+            "type": "string"
+          },
+          "documentoMotorista": {
+            "type": "string"
+          },
+          "tipo": {
+            "enum": [
+              "ADIANTAMENTO",
+              "SALDO",
+              "RPA",
+              "ESTADIA",
+              "PEDAGIO",
+              "AJUSTE_SALDO"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "enum": [
+              "EM_ABERTO",
+              "BLOQUEADO",
+              "CANCELADO",
+              "QUITADO",
+              "PAGO_EMBARCADOR",
+              "EM_PROCESSAMENTO",
+              "FALHA"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dataHoraInicio": {
+            "format": "date-time",
+            "type": "string",
+            "default": "2022-06-30T17:13:27.178Z"
+          },
+          "dataHoraFim": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "pagina": {
+            "type": "number",
+            "default": 1
+          },
+          "tamanho": {
+            "type": "number",
+            "default": 10
+          }
+        },
+        "required": [
+          "documentoContratado",
+          "documentoMotorista",
+          "dataHoraInicio",
+          "pagina",
+          "tamanho"
+        ]
+      },
+      "BuscarLancamenstosPorContratadoMotoristaResponseDto": {
+        "type": "object",
+        "properties": {
+          "dados": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pagina": {
+            "type": "number"
+          },
+          "quantidadePaginas": {
+            "type": "number"
+          },
+          "quantidadePorPagina": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "dados",
+          "pagina",
+          "quantidadePaginas",
+          "quantidadePorPagina",
+          "total"
+        ]
+      },
+      "BuscarDocumentoContratadoEMotoristaPorTokenParcelaDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "ContratoLancamentoStatus": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "ativo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "descricao",
+          "codigo",
+          "ativo"
+        ]
+      },
+      "ContratoLancamentoTipo": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "ativo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "descricao",
+          "codigo",
+          "ativo"
+        ]
+      },
+      "EnviarWebhookPagamentoPedagio": {
+        "type": "object",
+        "properties": {
+          "idContratoLancamento": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "idContratoLancamento"
+        ]
+      },
+      "Motorista": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "cnh": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "rg": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome",
+          "cnh",
+          "cpf",
+          "rg"
+        ]
+      },
+      "ProprietarioVeiculos": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "documento": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome",
+          "documento"
+        ]
+      },
+      "Cliente": {
+        "type": "object",
+        "properties": {
+          "getLogoUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "BuscarContratoQuitacaoSaldoResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "idContrato": {
+            "type": "number"
+          },
+          "token": {
+            "type": "string"
+          },
+          "valorOriginal": {
+            "type": "number"
+          },
+          "cidadeColeta": {
+            "type": "string"
+          },
+          "cidadeEntrega": {
+            "type": "string"
+          },
+          "pesoSaida": {
+            "type": "number"
+          },
+          "pesoChegada": {
+            "type": "number"
+          },
+          "liberado": {
+            "type": "boolean"
+          },
+          "deveAgendar": {
+            "type": "boolean"
+          },
+          "dataAgendamento": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "dataPagamento": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "dataDescarga": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "cartao": {
+            "type": "boolean"
+          },
+          "documentosFiscais": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "statusAdiantamento": {
+            "type": "string"
+          },
+          "statusPedagio": {
+            "type": "string"
+          },
+          "valorFrete": {
+            "type": "number"
+          },
+          "valorAdiantamento": {
+            "type": "number"
+          },
+          "valorPedagio": {
+            "type": "number"
+          },
+          "valorOutrosDescontos": {
+            "type": "number"
+          },
+          "valorOutrosAcrescimos": {
+            "type": "number"
+          },
+          "valorImpostos": {
+            "type": "number"
+          },
+          "valorQuebraMercadoria": {
+            "type": "number"
+          },
+          "valorQuebraFrete": {
+            "type": "number"
+          },
+          "valorSaldo": {
+            "type": "number"
+          },
+          "valorSaldoOriginal": {
+            "type": "number"
+          },
+          "valorMercadoria": {
+            "type": "number"
+          },
+          "percentualToleranciaPeso": {
+            "type": "number"
+          },
+          "percentualToleranciaPesoCliente": {
+            "type": "number"
+          },
+          "valorTarifaTonelada": {
+            "type": "number"
+          },
+          "tipoQuebraMercadoria": {
+            "type": "string"
+          },
+          "codigoTipoLancamento": {
+            "type": "string"
+          },
+          "estabelecimentoQuitacao": {
+            "type": "string"
+          },
+          "cnpjEstabelecimentoQuitacao": {
+            "type": "string"
+          },
+          "codigoStatusLancamento": {
+            "type": "string"
+          },
+          "usuarioQuitacao": {
+            "type": "string"
+          },
+          "freteLotacao": {
+            "type": "boolean"
+          },
+          "contratoVeiculos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "motorista": {
+            "$ref": "#/components/schemas/Motorista"
+          },
+          "documentosObrigatorios": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "proprietarioVeiculos": {
+            "$ref": "#/components/schemas/ProprietarioVeiculos"
+          },
+          "diferencaPeso": {
+            "type": "number"
+          },
+          "valorQuebraMercadoriaCalculado": {
+            "type": "number"
+          },
+          "valorInclusaoDebitos": {
+            "type": "number"
+          },
+          "valorInclusaoCreditos": {
+            "type": "number"
+          },
+          "taxasCliente": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clienteContrato": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "clienteContratoTomador": {
+            "$ref": "#/components/schemas/Cliente"
+          }
+        },
+        "required": [
+          "id",
+          "idContrato",
+          "token",
+          "valorOriginal",
+          "cidadeColeta",
+          "cidadeEntrega",
+          "pesoSaida",
+          "pesoChegada",
+          "liberado",
+          "deveAgendar",
+          "dataAgendamento",
+          "dataPagamento",
+          "dataDescarga",
+          "cartao",
+          "documentosFiscais",
+          "statusAdiantamento",
+          "statusPedagio",
+          "valorFrete",
+          "valorAdiantamento",
+          "valorPedagio",
+          "valorOutrosDescontos",
+          "valorOutrosAcrescimos",
+          "valorImpostos",
+          "valorQuebraMercadoria",
+          "valorQuebraFrete",
+          "valorSaldo",
+          "valorSaldoOriginal",
+          "valorMercadoria",
+          "percentualToleranciaPeso",
+          "percentualToleranciaPesoCliente",
+          "valorTarifaTonelada",
+          "tipoQuebraMercadoria",
+          "codigoTipoLancamento",
+          "estabelecimentoQuitacao",
+          "cnpjEstabelecimentoQuitacao",
+          "codigoStatusLancamento",
+          "usuarioQuitacao",
+          "freteLotacao",
+          "contratoVeiculos",
+          "motorista",
+          "documentosObrigatorios",
+          "proprietarioVeiculos",
+          "diferencaPeso",
+          "valorQuebraMercadoriaCalculado",
+          "valorInclusaoDebitos",
+          "valorInclusaoCreditos",
+          "taxasCliente",
+          "clienteContrato",
+          "clienteContratoTomador"
+        ]
+      },
+      "CadastroContratoQuitacaoSaldoRequest": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "pesoChegada": {
+            "type": "number"
+          },
+          "dataDescarga": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "idEstabelecimento": {
+            "type": "number"
+          },
+          "dataPagamentoFlexivel": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "pesoChegada",
+          "dataDescarga",
+          "idEstabelecimento",
+          "dataPagamentoFlexivel"
+        ]
+      },
+      "CalculoExtratoContratoQuitacaoSaldoRequest": {
+        "type": "object",
+        "properties": {
+          "valorFrete": {
+            "type": "number"
+          },
+          "valorMercadoria": {
+            "type": "number"
+          },
+          "pesoSaida": {
+            "type": "number"
+          },
+          "pesoChegada": {
+            "type": "number"
+          },
+          "percentualToleranciaPeso": {
+            "type": "number"
+          },
+          "tipoQuebraMercadoria": {
+            "type": "string"
+          },
+          "valorTarifaTonelada": {
+            "type": "number"
+          },
+          "freteLotacao": {
+            "type": "boolean"
+          },
+          "valorAdiantamento": {
+            "type": "number"
+          },
+          "valorOutrosAcrescimos": {
+            "type": "number"
+          },
+          "valorOutrosDescontos": {
+            "type": "number"
+          },
+          "valorInclusaoDebitos": {
+            "type": "number"
+          },
+          "valorInclusaoCreditos": {
+            "type": "number"
+          },
+          "valorImpostos": {
+            "type": "number"
+          },
+          "taxasCliente": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "valorFrete",
+          "valorMercadoria",
+          "pesoSaida",
+          "pesoChegada",
+          "percentualToleranciaPeso",
+          "tipoQuebraMercadoria",
+          "valorTarifaTonelada",
+          "freteLotacao",
+          "valorAdiantamento",
+          "valorOutrosAcrescimos",
+          "valorOutrosDescontos",
+          "valorInclusaoDebitos",
+          "valorInclusaoCreditos",
+          "valorImpostos",
+          "taxasCliente"
+        ]
+      },
+      "CalculoExtratoContratoQuitacaoSaldoResponse": {
+        "type": "object",
+        "properties": {
+          "saldoQuitacao": {
+            "type": "number"
+          },
+          "valorQuebraFrete": {
+            "type": "number"
+          },
+          "valorQuebraMercadoria": {
+            "type": "number"
+          },
+          "valorQuebraMercadoriaCalculada": {
+            "type": "number"
+          },
+          "pesoQuebraLiquido": {
+            "type": "number"
+          },
+          "pesoTolerado": {
+            "type": "number"
+          },
+          "pesoQuebra": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "saldoQuitacao",
+          "valorQuebraFrete",
+          "valorQuebraMercadoria",
+          "valorQuebraMercadoriaCalculada",
+          "pesoQuebraLiquido",
+          "pesoTolerado",
+          "pesoQuebra"
+        ]
+      },
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "idUsuarioAuth": {
+            "type": "string"
+          },
+          "login": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "celular": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "ativo": {
+            "type": "boolean"
+          },
+          "dtAlteracao": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "dtCriacao": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "getAvatarUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "Estabelecimento": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "permiteQuitacaoFrete": {
+            "type": "boolean"
+          },
+          "geraProtocolo": {
+            "type": "boolean"
+          },
+          "ativo": {
+            "type": "boolean"
+          },
+          "credenciadoRede": {
+            "type": "boolean"
+          },
+          "diasLiquidacao": {
+            "type": "number"
+          },
+          "taxaMdr": {
+            "type": "number"
+          },
+          "dataAlteracao": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "dataCriacao": {
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
+      "UsuarioEstabelecimento": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "usuarioId": {
+            "type": "number"
+          },
+          "estabelecimentoId": {
+            "type": "number"
+          },
+          "dtAlteracao": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "dtCriacao": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "usuario": {
+            "$ref": "#/components/schemas/Usuario"
+          },
+          "estabelecimento": {
+            "$ref": "#/components/schemas/Estabelecimento"
+          }
+        },
+        "required": [
+          "usuarioId",
+          "estabelecimentoId"
+        ]
+      },
+      "ValidacaoViaSMSRequest": {
+        "type": "object",
+        "properties": {
+          "ddd": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ddd",
+          "numero",
+          "token"
+        ]
+      },
+      "ValidaCodigoSegurancaRequest": {
+        "type": "object",
+        "properties": {
+          "codigoSeguranca": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "codigoSeguranca",
+          "token"
+        ]
+      },
+      "ValidarTokenPagamentoAppTmovRequest": {
+        "type": "object",
+        "properties": {
+          "tokenPagamentoAppTmov": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "tokenPagamentoAppTmov",
+          "token"
+        ]
+      },
+      "SalvarDadosTratativaQuebraSaldoRequestDto": {
+        "type": "object",
+        "properties": {
+          "semTratativa": {
+            "type": "boolean"
+          },
+          "justificativaQuebra": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "semTratativa",
+          "justificativaQuebra"
+        ]
+      },
+      "Produto": {
+        "type": "object",
+        "properties": {}
+      },
+      "Conta": {
+        "type": "object",
+        "properties": {
+          "idContaDock": {
+            "type": "number"
+          },
+          "produto": {
+            "$ref": "#/components/schemas/Produto"
+          },
+          "cartoes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "transferenciasP2POrigem": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "transferenciasP2PDestino": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ativo": {
+            "type": "boolean"
+          },
+          "desvinculoSI": {
+            "type": "boolean"
+          },
+          "senha": {
+            "type": "string"
+          },
+          "restricaoBacenjud": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "idContaDock",
+          "produto",
+          "cartoes",
+          "transferenciasP2POrigem",
+          "transferenciasP2PDestino",
+          "ativo",
+          "desvinculoSI",
+          "senha",
+          "restricaoBacenjud"
+        ]
+      },
+      "ConsultaMotoristaContaDockResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "idContaDock": {
+            "type": "number"
+          },
+          "idPessoa": {
+            "type": "object"
+          },
+          "number": {
+            "type": "object"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "titular": {
+            "type": "boolean"
+          },
+          "saldoDisponivelSaque": {
+            "type": "number"
+          },
+          "saldoDisponivelGlobal": {
+            "type": "number"
+          },
+          "saldoAtualFinal": {
+            "type": "number"
+          },
+          "limiteGlobal": {
+            "type": "number"
+          },
+          "idStatusConta": {
+            "type": "number"
+          },
+          "statusConta": {
+            "type": "string"
+          },
+          "dataStatusConta": {
+            "type": "string"
+          },
+          "dataCadastro": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "idContaDock",
+          "idPessoa",
+          "number",
+          "nome",
+          "titular",
+          "saldoDisponivelSaque",
+          "saldoDisponivelGlobal",
+          "saldoAtualFinal",
+          "limiteGlobal",
+          "idStatusConta",
+          "statusConta",
+          "dataStatusConta",
+          "dataCadastro"
+        ]
+      },
+      "ConsultaSaldoMotoristaResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "idContaDock": {
+            "type": "number"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "titular": {
+            "type": "boolean"
+          },
+          "saldoDisponivelSaque": {
+            "type": "number"
+          },
+          "saldoDisponivelGlobal": {
+            "type": "number"
+          },
+          "saldoAtualFinal": {
+            "type": "number"
+          },
+          "limiteGlobal": {
+            "type": "number"
+          },
+          "habilitadoEmprestimo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "idContaDock",
+          "nome",
+          "titular",
+          "saldoDisponivelSaque",
+          "saldoDisponivelGlobal",
+          "saldoAtualFinal",
+          "limiteGlobal",
+          "habilitadoEmprestimo"
+        ]
+      },
+      "ValidacaoOnboardingRequestDto": {
+        "type": "object",
+        "properties": {
+          "documentoContratado": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "documentoContratado"
+        ]
+      },
+      "AtivarTagRequestDTO": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string"
+          },
+          "placa": {
+            "type": "string"
+          },
+          "categoriaVeiculo": {
+            "type": "number"
+          },
+          "idCliente": {
+            "type": "number"
+          },
+          "nomeUsuarioVinculo": {
+            "type": "string"
+          },
+          "cpfUsuarioVinculo": {
+            "type": "string"
+          },
+          "perfilParametro": {
+            "type": "string"
+          },
+          "origem": {
+            "type": "number"
+          },
+          "filial": {
+            "type": "string"
+          },
+          "cnpjFilial": {
+            "type": "string"
+          },
+          "pulouAtivacao": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "documento",
+          "placa",
+          "categoriaVeiculo",
+          "idCliente",
+          "nomeUsuarioVinculo",
+          "cpfUsuarioVinculo",
+          "perfilParametro",
+          "origem",
+          "filial",
+          "cnpjFilial",
+          "pulouAtivacao"
+        ]
+      },
+      "SubstituirTagDto": {
+        "type": "object",
+        "properties": {
+          "serialNumber": {
+            "type": "string"
+          },
+          "newSerialNumber": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "serialNumber",
+          "newSerialNumber"
+        ]
+      },
+      "VehicleDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "licensePlate": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "productionYear": {
+            "type": "number"
+          },
+          "modelYear": {
+            "type": "number"
+          },
+          "categoryName": {
+            "type": "string"
+          },
+          "categoryCode": {
+            "type": "number"
+          },
+          "armored": {
+            "type": "boolean"
+          },
+          "vehicleType": {
+            "type": "number"
+          },
+          "axles": {
+            "type": "number"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "licensePlate",
+          "brand",
+          "model",
+          "productionYear",
+          "modelYear",
+          "categoryName",
+          "categoryCode",
+          "armored",
+          "vehicleType",
+          "axles",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "TagDTO": {
+        "type": "object",
+        "properties": {
+          "serialNumber": {
+            "type": "string"
+          },
+          "nsu": {
+            "type": "string"
+          },
+          "cnp": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "number"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "blocked": {
+            "type": "boolean"
+          },
+          "canceled": {
+            "type": "boolean"
+          },
+          "pointToPoint": {
+            "type": "boolean"
+          },
+          "vehicle": {
+            "$ref": "#/components/schemas/VehicleDTO"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "nomeProprietario": {
+            "type": "string",
+            "nullable": true
+          },
+          "whitelist": {
+            "type": "boolean"
+          },
+          "customerId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "serialNumber",
+          "nsu",
+          "cnp",
+          "status",
+          "statusCode",
+          "available",
+          "blocked",
+          "canceled",
+          "pointToPoint",
+          "vehicle",
+          "createdAt",
+          "updatedAt",
+          "nomeProprietario",
+          "whitelist",
+          "customerId"
+        ]
+      },
+      "ListarTagResponseDTO": {
+        "type": "object",
+        "properties": {
+          "pagina": {
+            "type": "number"
+          },
+          "total": {
+            "type": "number"
+          },
+          "tamanho": {
+            "type": "number"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "pagina",
+          "total",
+          "tamanho",
+          "results"
+        ]
+      },
+      "AtualizarDadosTagDto": {
+        "type": "object",
+        "properties": {
+          "habilitada": {
+            "type": "boolean"
+          },
+          "whitelist": {
+            "type": "boolean"
+          },
+          "serialNumber": {
+            "type": "string"
+          },
+          "idLancamento": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "habilitada",
+          "whitelist",
+          "serialNumber",
+          "idLancamento"
+        ]
+      },
+      "CategoriasVeiculoDTO": {
+        "type": "object",
+        "properties": {
+          "clusterCode": {
+            "type": "number"
+          },
+          "cluster": {
+            "type": "string"
+          },
+          "code": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "vehicleType": {
+            "type": "number"
+          },
+          "axles": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "clusterCode",
+          "cluster",
+          "code",
+          "description",
+          "vehicleType",
+          "axles"
+        ]
+      },
+      "BuscarTagComViagemPorMotoristaDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "WebhookPassagemDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "ConsultaCidadeRoteirizacaoRequestDTO": {
+        "type": "object",
+        "properties": {}
+      },
+      "ETipoVeiculo": {
+        "type": "string",
+        "enum": [
+          "CAMINHAO",
+          "CARRO",
+          "ONIBUS",
+          "MOTO"
+        ]
+      },
+      "RoteirizacaoViagemAvulsaRequestDto": {
+        "type": "object",
+        "properties": {
+          "cidadeOrigem": {
+            "$ref": "#/components/schemas/ConsultaCidadeRoteirizacaoRequestDTO"
+          },
+          "cidadeDestino": {
+            "$ref": "#/components/schemas/ConsultaCidadeRoteirizacaoRequestDTO"
+          },
+          "tipoVeiculo": {
+            "$ref": "#/components/schemas/ETipoVeiculo"
+          },
+          "quantidadeEixos": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "cidadeOrigem",
+          "cidadeDestino",
+          "tipoVeiculo",
+          "quantidadeEixos"
+        ]
+      },
+      "CalcularCustoTotalViagemRequestDto": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string"
+          },
+          "serialNumber": {
+            "type": "string"
+          },
+          "placa": {
+            "type": "string"
+          },
+          "quantidadeEixos": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "documento",
+          "serialNumber",
+          "placa",
+          "quantidadeEixos"
+        ]
+      },
+      "EstadoRoteirizacaoViagemAvulsa": {
+        "type": "object",
+        "properties": {}
+      },
+      "CidadeRoteirizacaoViagemAvulsa": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "example": "Rondonopolis"
+          },
+          "codigoIbge": {
+            "type": "number"
+          },
+          "latitude": {
+            "type": "number",
+            "example": -16.4603533
+          },
+          "longitude": {
+            "type": "number",
+            "example": -54.6397099
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoRoteirizacaoViagemAvulsa"
+          }
+        },
+        "required": [
+          "latitude",
+          "longitude",
+          "estado"
+        ]
+      },
+      "TempoEstimadoRota": {
+        "type": "object",
+        "properties": {}
+      },
+      "RealizarCompraViagemAvulsaRequestDto": {
+        "type": "object",
+        "properties": {
+          "idHistorico": {
+            "type": "string"
+          },
+          "placa": {
+            "type": "string"
+          },
+          "serialNumber": {
+            "type": "string"
+          },
+          "documento": {
+            "type": "string"
+          },
+          "cidadeOrigem": {
+            "$ref": "#/components/schemas/CidadeRoteirizacaoViagemAvulsa"
+          },
+          "cidadeDestino": {
+            "$ref": "#/components/schemas/CidadeRoteirizacaoViagemAvulsa"
+          },
+          "pracas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "valorTotal": {
+            "type": "number"
+          },
+          "distanciaEstimada": {
+            "type": "number"
+          },
+          "tempoEstimado": {
+            "$ref": "#/components/schemas/TempoEstimadoRota"
+          },
+          "quantidadeEixos": {
+            "type": "number"
+          },
+          "taxasAdicionais": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "senha": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "idHistorico",
+          "placa",
+          "serialNumber",
+          "documento",
+          "cidadeOrigem",
+          "cidadeDestino",
+          "pracas",
+          "valorTotal",
+          "distanciaEstimada",
+          "tempoEstimado",
+          "quantidadeEixos",
+          "taxasAdicionais",
+          "senha"
+        ]
+      },
+      "BaseRequestUserAuditTagDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "AtualizarFilialTagParametroRequestDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "MargemSegurancaDto": {
+        "type": "object",
+        "properties": {
+          "horas": {
+            "type": "number"
+          },
+          "valorMinimoQuilometro": {
+            "type": "number"
+          },
+          "valorMaximoQuilometro": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "horas",
+          "valorMinimoQuilometro",
+          "valorMaximoQuilometro"
+        ]
+      },
+      "ParametrosTriggerTimeout": {
+        "type": "object",
+        "properties": {
+          "quilometroHora": {
+            "type": "number"
+          },
+          "quantidadeHoraUtilDia": {
+            "type": "number"
+          },
+          "horaInicioDia": {
+            "type": "string"
+          },
+          "horaFimDia": {
+            "type": "string"
+          },
+          "margemSegurancaSecundaria": {
+            "$ref": "#/components/schemas/MargemSegurancaDto"
+          },
+          "margemSegurancaTercearia": {
+            "$ref": "#/components/schemas/MargemSegurancaDto"
+          },
+          "quantidadeHoraDescontarPrimeiroDia": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "quilometroHora",
+          "quantidadeHoraUtilDia",
+          "horaInicioDia",
+          "horaFimDia",
+          "margemSegurancaSecundaria",
+          "margemSegurancaTercearia",
+          "quantidadeHoraDescontarPrimeiroDia"
+        ]
+      },
+      "TagParametroClienteRequestDto": {
+        "type": "object",
+        "properties": {
+          "idCliente": {
+            "type": "number"
+          },
+          "distanciaMaxGeolocalizacao": {
+            "type": "number"
+          },
+          "distanciaMaxUltimaPraca": {
+            "type": "number"
+          },
+          "valorMinimoSaldoInsuficiente": {
+            "type": "number"
+          },
+          "habilitarTriggerUltimaPraca": {
+            "type": "boolean"
+          },
+          "habilitarTriggerGeolocalizacao": {
+            "type": "boolean"
+          },
+          "habilitarTriggerSaldoInsuficiente": {
+            "type": "boolean"
+          },
+          "habilitarTriggerSaldoNegativo": {
+            "type": "boolean"
+          },
+          "habilitarTriggerQuitacaoSaldo": {
+            "type": "boolean"
+          },
+          "habilitarTriggerFinalizacaoViagem": {
+            "type": "boolean"
+          },
+          "habilitarTriggerForaRotaViagemAvulsa": {
+            "type": "boolean"
+          },
+          "habilitarTriggerTimeout": {
+            "type": "boolean"
+          },
+          "parametrosTimeout": {
+            "$ref": "#/components/schemas/ParametrosTriggerTimeout"
+          }
+        },
+        "required": [
+          "idCliente",
+          "distanciaMaxGeolocalizacao",
+          "distanciaMaxUltimaPraca",
+          "valorMinimoSaldoInsuficiente",
+          "habilitarTriggerUltimaPraca",
+          "habilitarTriggerGeolocalizacao",
+          "habilitarTriggerSaldoInsuficiente",
+          "habilitarTriggerSaldoNegativo",
+          "habilitarTriggerQuitacaoSaldo",
+          "habilitarTriggerFinalizacaoViagem",
+          "habilitarTriggerForaRotaViagemAvulsa",
+          "habilitarTriggerTimeout",
+          "parametrosTimeout"
+        ]
+      },
+      "CadastroCargaAvulsaDto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "example": "Joaquim da Silva"
+          },
+          "descricao": {
+            "type": "string",
+            "example": "Descrição de até 150 caracteres"
+          },
+          "contaOrigem": {
+            "type": "number"
+          },
+          "contaDestino": {
+            "type": "number",
+            "example": 2
+          },
+          "cargaAvulsaTipo": {
+            "type": "number",
+            "example": 3
+          },
+          "valor": {
+            "type": "number"
+          },
+          "referencia_cod": {
+            "type": "string",
+            "example": "9851238"
+          },
+          "categoria": {
+            "type": "number",
+            "example": 1
+          },
+          "tipoReferencia": {
+            "type": "string",
+            "example": 1
+          }
+        },
+        "required": [
+          "nome",
+          "descricao",
+          "contaOrigem",
+          "contaDestino",
+          "cargaAvulsaTipo",
+          "valor",
+          "referencia_cod",
+          "categoria",
+          "tipoReferencia"
+        ]
+      },
+      "ReprocessarCargaAvulsaRequestDto": {
+        "type": "object",
+        "properties": {
+          "cargas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "cargas"
+        ]
+      },
+      "SolicitarTransferenciaTEDPorDocumentoRequestDto": {
+        "type": "object",
+        "properties": {
+          "codigoBancoDestino": {
+            "type": "string",
+            "example": "001"
+          },
+          "agenciaNumeroDestino": {
+            "type": "string",
+            "example": "1234"
+          },
+          "agenciaDigitoDestino": {
+            "type": "string",
+            "example": "12"
+          },
+          "contaNumeroDestino": {
+            "type": "string",
+            "example": "1234"
+          },
+          "contaDigitoDestino": {
+            "type": "string",
+            "example": "12"
+          },
+          "contaTipoDestino": {
+            "type": "string",
+            "description": "cc = Conta Corrente, pp = Conta Poupança",
+            "enum": [
+              "cc",
+              "pp"
+            ]
+          },
+          "nomeBeneficiarioDestino": {
+            "type": "string",
+            "example": "João da Silva"
+          },
+          "documentoDestino": {
+            "type": "string",
+            "enum": [
+              "01234567890",
+              "01234567000189"
+            ]
+          },
+          "valor": {
+            "type": "number",
+            "example": 1234.1
+          },
+          "senhaCartao": {
+            "type": "string",
+            "example": "1234"
+          },
+          "salvarContaFavorecido": {
+            "type": "boolean",
+            "example": true
+          },
+          "documentoOrigem": {
+            "type": "string",
+            "enum": [
+              "01234567890",
+              "01234567000189"
+            ]
+          }
+        },
+        "required": [
+          "codigoBancoDestino",
+          "agenciaNumeroDestino",
+          "agenciaDigitoDestino",
+          "contaNumeroDestino",
+          "contaDigitoDestino",
+          "contaTipoDestino",
+          "nomeBeneficiarioDestino",
+          "documentoDestino",
+          "valor",
+          "senhaCartao",
+          "salvarContaFavorecido",
+          "documentoOrigem"
+        ]
+      },
+      "WebHookTEDDto": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "type": "string",
+            "enum": [
+              "PROCESSOR",
+              "BANKTRANSFER-CASH-IN",
+              "ALIAS-BANKTRANSFERSIN-NOTIFICATION"
+            ]
+          },
+          "payload": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "origin",
+          "payload"
+        ]
+      },
+      "PagarBoletoRequestDto": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string"
+          },
+          "codigoDeBarras": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "senha": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "documento",
+          "codigoDeBarras",
+          "senha"
+        ]
+      },
+      "GerarPagamentoBoletoResponseDto": {
+        "type": "object",
+        "properties": {
+          "idAccount": {
+            "type": "number"
+          },
+          "barCodeNumber": {
+            "type": "string"
+          },
+          "dueDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "assignor": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "assignorDocument": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string"
+          },
+          "discount": {
+            "type": "number"
+          },
+          "interest": {
+            "type": "number"
+          },
+          "fine": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PAID",
+              "PENDING",
+              "NOT_EXECUTED"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "idAdjustment": {
+            "type": "number",
+            "nullable": true
+          },
+          "transactionCode": {
+            "type": "string"
+          },
+          "transactionDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "idPaymentConfirmation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "idAccount",
+          "barCodeNumber",
+          "dueDate",
+          "assignor",
+          "amount",
+          "assignorDocument",
+          "description",
+          "discount",
+          "interest",
+          "fine",
+          "message",
+          "uuid",
+          "idAdjustment",
+          "transactionCode",
+          "transactionDate",
+          "idPaymentConfirmation"
+        ]
+      },
+      "GerarBoletoCashInRequestDto": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "documento"
+        ]
+      },
+      "ConsultaCodigoDeBarrasResponseDto": {
+        "type": "object",
+        "properties": {
+          "codigoDeBarras": {
+            "type": "string"
+          },
+          "favorecido": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "dataDeVencimento": {
+            "type": "string",
+            "format": "YYYY-MM-DD"
+          }
+        },
+        "required": [
+          "codigoDeBarras",
+          "favorecido",
+          "valor",
+          "dataDeVencimento"
+        ]
+      },
+      "ScheduleNextWindowInfo": {
+        "type": "object",
+        "properties": {
+          "ScheduleNextWindowDate": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ScheduleNextWindowDate"
+        ]
+      },
+      "RecibosBoletos": {
+        "type": "object",
+        "properties": {
+          "idAccount": {
+            "type": "number"
+          },
+          "barCodeNumber": {
+            "type": "string"
+          },
+          "dueDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "assignor": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "assignorDocument": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string"
+          },
+          "discount": {
+            "type": "number"
+          },
+          "interest": {
+            "type": "number"
+          },
+          "fine": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PAID",
+              "PENDING",
+              "NOT_EXECUTED"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "idAdjustment": {
+            "type": "number",
+            "nullable": true
+          },
+          "transactionCode": {
+            "type": "string"
+          },
+          "transactionDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "idPaymentConfirmation": {
+            "type": "string"
+          },
+          "idIssuer": {
+            "type": "number"
+          },
+          "ScheduleNextWindowInfo": {
+            "$ref": "#/components/schemas/ScheduleNextWindowInfo"
+          }
+        },
+        "required": [
+          "idAccount",
+          "barCodeNumber",
+          "dueDate",
+          "assignor",
+          "amount",
+          "assignorDocument",
+          "description",
+          "discount",
+          "interest",
+          "fine",
+          "message",
+          "uuid",
+          "idAdjustment",
+          "transactionCode",
+          "transactionDate",
+          "idPaymentConfirmation",
+          "idIssuer",
+          "ScheduleNextWindowInfo"
+        ]
+      },
+      "ListarRecibosBoletoResponse": {
+        "type": "object",
+        "properties": {
+          "previousPage": {
+            "type": "number"
+          },
+          "currentPage": {
+            "type": "number"
+          },
+          "nextPage": {
+            "type": "number"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "totalItems": {
+            "type": "number"
+          },
+          "maxItemsPerPage": {
+            "type": "number"
+          },
+          "totalItemsPage": {
+            "type": "number"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecibosBoletos"
+            }
+          }
+        },
+        "required": [
+          "previousPage",
+          "currentPage",
+          "nextPage",
+          "last",
+          "totalPages",
+          "totalItems",
+          "maxItemsPerPage",
+          "totalItemsPage",
+          "items"
+        ]
+      },
+      "ConsultarOperadoraDisponivelRecargaResponseDto": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "descricao",
+          "codigo"
+        ]
+      },
+      "OperadoraCelularResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string",
+            "description": "Código da operadora na Dock"
+          }
+        },
+        "required": [
+          "id",
+          "descricao",
+          "codigo"
+        ]
+      },
+      "BuscarTodosRecargaCelularResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "ddd": {
+            "type": "string"
+          },
+          "telefone": {
+            "type": "string",
+            "description": "Telefone da recarga"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "amountKeyDock": {
+            "type": "number"
+          },
+          "idAjusteDock": {
+            "type": "number"
+          },
+          "codigoTransacaoDock": {
+            "type": "string",
+            "description": "Código da transação"
+          },
+          "idOrdemDock": {
+            "type": "string",
+            "description": "ID do pedido da compra da recarga na DOCK"
+          },
+          "dataRecarga": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Data em que a recarga foi realizada"
+          },
+          "operadora": {
+            "$ref": "#/components/schemas/OperadoraCelularResponse"
+          }
+        },
+        "required": [
+          "id",
+          "ddd",
+          "telefone",
+          "valor",
+          "amountKeyDock",
+          "idAjusteDock",
+          "codigoTransacaoDock",
+          "idOrdemDock",
+          "dataRecarga",
+          "operadora"
+        ]
+      },
+      "CriarPedidoRequestDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "ID da ordem na dock"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Valor da recarga"
+          },
+          "senha": {
+            "type": "string",
+            "description": "Senha do cartão"
+          }
+        },
+        "required": [
+          "orderId",
+          "amount",
+          "senha"
+        ]
+      },
+      "LocalizacaoRecargaCelular": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "string",
+            "description": "Latitude"
+          },
+          "longitude": {
+            "type": "string",
+            "description": "Longitude"
+          },
+          "horizontalAccurrancy": {
+            "type": "string",
+            "description": "Precisão da localização"
+          }
+        }
+      },
+      "ConfirmarPedidoResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id da ordem na Dock"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Valor da recarga"
+          },
+          "receipt": {
+            "type": "string"
+          },
+          "location": {
+            "description": "Dados da localização no momento da recarga",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LocalizacaoRecargaCelular"
+              }
+            ]
+          },
+          "merchantId": {
+            "type": "string",
+            "description": "Dados da localização no momento da recarga"
+          },
+          "merchantParentId": {
+            "type": "string",
+            "description": "Dados da localização no momento da recarga"
+          },
+          "merchantName": {
+            "type": "string",
+            "description": "Dados da localização no momento da recarga"
+          },
+          "telefone": {
+            "type": "string",
+            "description": "Dados da localização no momento da recarga"
+          },
+          "dataRecarga": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Data da recarga no formato ISO 8601"
+          }
+        },
+        "required": [
+          "id",
+          "amount",
+          "telefone",
+          "dataRecarga"
+        ]
+      },
+      "CriarRecargaRequestDto": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string",
+            "description": "CPF/CNPJ do usuário"
+          },
+          "ddd": {
+            "type": "string",
+            "description": "DDD number (\"Discagem Direta à Distância\" or \"Direct Distance d Dialing\")"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Número do telefone"
+          }
+        },
+        "required": [
+          "documento",
+          "ddd",
+          "phoneNumber"
+        ]
+      },
+      "CriarRecargaResponseDto": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "ID da ordem de recarga feio da dock"
+          },
+          "operadora": {
+            "type": "string",
+            "description": "Nome da operadora que o pedido pertence"
+          },
+          "options": {
+            "description": "Objeto para consulta os valores disponíveis para a recarga",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "orderId",
+          "operadora",
+          "options"
+        ]
+      }
+    }
+  },
+  "paths": {
+    "/contratos": {
+      "post": {
+        "operationId": "ContratoController_salvar",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CadastroContratoRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "salva um contrato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contrato"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Contrato"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "ContratoController_buscarTodos",
+        "parameters": [
+          {
+            "name": "dataEmissao",
+            "required": true,
+            "in": "query",
+            "example": "2020-03-25T17:55:50.393Z",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dataEmissaoFim",
+            "required": true,
+            "in": "query",
+            "example": "2020-03-25T17:55:50.393Z",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "motoristaNome",
+            "required": true,
+            "in": "query",
+            "example": "João da Silva",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "motoristaCpf",
+            "required": true,
+            "in": "query",
+            "example": "75474931069",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contratadoNome",
+            "required": true,
+            "in": "query",
+            "example": "Manoel da Silva",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "placa",
+            "required": true,
+            "in": "query",
+            "example": "ABC1432",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "documentoFiscal",
+            "required": true,
+            "in": "query",
+            "example": 234234,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "idIntegracao",
+            "required": true,
+            "in": "query",
+            "example": 10,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "idProtocolo",
+            "required": true,
+            "in": "query",
+            "example": 53,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "query",
+            "example": 10,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ciot",
+            "required": true,
+            "in": "query",
+            "example": "123312",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "required": true,
+            "in": "query",
+            "example": "TP1234567891234567",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "origem",
+            "required": true,
+            "in": "query",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": true,
+            "in": "query",
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "ativo",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tipo",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "codigoFilial",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "documentoFilial",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nomeFilial",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "documentoClienteTomador",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nomeClienteTomador",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "formaPagamento",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "busca todos os contratos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contrato"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Contrato"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/contratos/{id}": {
+      "get": {
+        "operationId": "ContratoController_buscarPorId",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "busca um contrato por id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contrato"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Contrato"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/contratos/updateContratoTmovPay": {
+      "post": {
+        "operationId": "ContratoController_updateContratoTmovPay",
+        "summary": "Atualização contrato TmovPay",
+        "description": "Faz a atualização de contrato TmovPay vindo do maxys",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AtualizarContratoTmovPayDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Atualiza o contrato TmovPay",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contrato"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Contrato"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/contratos/{idContrato}/bloquear": {
+      "patch": {
+        "operationId": "ContratoController_bloquear",
+        "parameters": [
+          {
+            "name": "idContrato",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Atualiza o bloquear contrato por id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contrato"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Contrato"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/contratos/{idContrato}/desbloquear": {
+      "patch": {
+        "operationId": "ContratoController_desbloquear",
+        "parameters": [
+          {
+            "name": "idContrato",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Atualiza o desbloquear contrato por idContrato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contrato"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Contrato"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/contratos/{idIntegracao}/atualizarLancamentos": {
+      "patch": {
+        "operationId": "ContratoController_atualizarLancamentos",
+        "parameters": [
+          {
+            "name": "idIntegracao",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AtualizarContratoLancamentoRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Atualiza o contrato de lançamento por idIntegração",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contrato"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Contrato"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/contratoStatus": {
+      "get": {
+        "operationId": "ContratoStatusController_buscarTodos",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "busca todos os status do contrato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratoStatus"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Contrato"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  }
+}
